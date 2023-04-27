@@ -1,0 +1,111 @@
+ MACHINE LEARNING CODE
+import pandas as pd 
+import numpy as np
+import os, sys from google.colab 
+import drive drive.mount("/content/gdrive") import pandas as pd 
+data = pd.read_csv('/content/gdrive/My Drive/data/parkinsons.data') print(data.iloc[[0]]) 
+data['status']
+ predictors = data.drop(['name'], axis = 1) 
+predictors = predictors.drop(['status'], axis = 1) print(predictors.columns) 
+target = data['status'] 
+from sklearn.preprocessing 
+import MinMaxScaler 
+scaler = MinMaxScaler((-1, 1))
+ X = scaler.fit_transform(predictors) 
+Y = target
+LOGISTIC REGRESSION
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression 
+from sklearn import metrics X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = .25, random_state = 7) 
+from sklearn import datasets 
+from sklearn import metrics 
+from sklearn.linear_model import LogisticRegression 
+
+FIT THE MODEL
+model = LogisticRegression() model.fit(X_train, Y_train) y_pred = model.predict(X_test)
+print("Logistic Regression: ") 
+print(metrics.accuracy_score(Y_test, y_pred)) 
+print(metrics.classification_report(Y_test,y_pred)) print(metrics.confusion_matrix(Y_test, y_pred)) 
+
+GAUSSIAN NAIVE BAYES
+ from sklearn import datasets 
+from sklearn import metrics from sklearn.naive_bayes import GaussianNB model = GaussianNB() model.fit(X_train, Y_train) y_pred = model.predict(X_test) print("Gaussian Naive Bayes:")
+print(metrics.accuracy_score(Y_test, y_pred)) 
+print(metrics.classification_report(Y_test,y_pred)) print(metrics.confusion_matrix(Y_test, y_pred)) 
+
+KNN
+from sklearn import datasets 
+from sklearn import metrics 
+from sklearn.neighbors import KNeighborsClassifier model = KNeighborsClassifier() model.fit(X_train, Y_train) y_pred = model.predict(X_test) 
+print("k-Nearest Neighbor: ") 
+print(metrics.accuracy_score(Y_test, y_pred)) 
+print(metrics.classification_report(Y_test,y_pred)) print(metrics.confusion_matrix(Y_test, y_pred)) 
+
+SUPPORT VECTOR MACHINE
+from sklearn import datasets
+from sklearn import metrics 
+from sklearn.svm import SVC model = SVC() model.fit(X_train, Y_train) y_pred = model.predict(X_test) 
+print("Support Vector Machine: ") 
+print(metrics.accuracy_score(Y_test, y_pred)) 
+print(metrics.classification_report(Y_test,y_pred)) print(metrics.confusion_matrix(Y_test, y_pred))
+ 
+DECISION TREE CLASSIFIER
+from sklearn import datasets 
+from sklearn import metrics 
+from sklearn.tree import DecisionTreeClassifier model = DecisionTreeClassifier() model.fit(X_train, Y_train) 
+y_pred = model.predict(X_test) print("Classification and Regression Trees") print(metrics.accuracy_score(Y_test, y_pred)) print(metrics.classification_report(Y_test, y_pred)) 
+print(metrics.confusion_matrix(Y_test, y_pred))
+
+7.2 HEART SENSOR CODE:
+int PulseSensorPurplePin = 0;      
+int LED13 = 2; 
+int Signal;                
+int Threshold = 550;           
+
+THE SETUP FUNCTION:
+void setup() {
+pinMode(LED13,OUTPUT);
+Serial.begin(9600);         
+}
+void loop() {
+  Signal = analogRead(PulseSensorPurplePin);  
+   Serial.println(Signal);                    
+   if(Signal > Threshold){                           
+     digitalWrite(LED13,LOW);
+   } else {
+     digitalWrite(LED13,HIGH
+}
+delay(10);
+}
+
+7.3 LM35 CODE:
+
+const int sensorPin = A0; 
+float sensorValue;
+float voltageOut;
+
+
+float temperatureC;
+float temperatureF;
+void setup() {
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+}
+
+
+void loop() {
+  sensorValue = analogRead(sensorPin);
+  voltageOut = (sensorValue * 25000) / 1024;
+  temperatureC = voltageOut / 10;
+  temperatureF = (temperatureC * 1.8) + 32;
+  Serial.print("Temperature(ºC): ");
+  Serial.print(temperatureC);
+  Serial.print("  Temperature(ºF): ");
+  Serial.print(temperatureF);
+  Serial.print("  Voltage(mV): ");
+  Serial.println(voltageOut);
+  delay(1000);
+}
+
+
+
