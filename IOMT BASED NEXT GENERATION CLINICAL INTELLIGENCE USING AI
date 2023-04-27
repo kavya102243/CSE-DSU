@@ -1,0 +1,15 @@
+MACHINE LEARNING CODE
+import pandas as pd 
+import numpy as np
+import os, sys from google.colab 
+import drive drive.mount("/content/gdrive") import pandas as pd 
+data = pd.read_csv('/content/gdrive/My Drive/data/parkinsons.data') print(data.iloc[[0]]) 
+data['status']
+ predictors = data.drop(['name'], axis = 1) 
+predictors = predictors.drop(['status'], axis = 1) print(predictors.columns) 
+target = data['status'] 
+from sklearn.preprocessing 
+import MinMaxScaler 
+scaler = MinMaxScaler((-1, 1))
+ X = scaler.fit_transform(predictors) 
+Y = target
